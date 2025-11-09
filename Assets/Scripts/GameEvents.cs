@@ -5,5 +5,5 @@ public static class GameEvents
 {
     public static Action OnDestructionModeEntered;
 
-    public static Action<string> OnBuildModeEntered;
+    public static Action<BuildingData> OnBuildModeEntered;
 }

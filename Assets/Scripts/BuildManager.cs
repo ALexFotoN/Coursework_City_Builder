@@ -1,12 +1,10 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using System.Linq;
 
 public class BuildManager : MonoBehaviour
 {
-    //to config
-    [SerializeField]
-    private Building _buildingPrefab;
     private Building _currentBuilding;
 
     private void Awake()
@@ -21,9 +19,9 @@ public class BuildManager : MonoBehaviour
         GameEvents.OnDestructionModeEntered -= BuildModeExit;
     }
 
-    private void BuildModeEnter(string id)
+    private void BuildModeEnter(BuildingData data)
     {
-        StartCoroutine(YieldEndFrame(CreateBuilding));
+        StartCoroutine(YieldEndFrame(CreateBuilding, data));
     }
 
     private void BuildModeExit()
@@ -36,10 +34,14 @@ public class BuildManager : MonoBehaviour
         _currentBuilding = null;
     }
 
-    private void CreateBuilding()
+    private void CreateBuilding(BuildingData data)
     {
-        _currentBuilding = Instantiate(_buildingPrefab);
-        _currentBuilding.Init();
+        if (data == null)
+        {
+            return;
+        }
+        _currentBuilding = Instantiate(data.Prefab);
+        _currentBuilding.Init(data);
         _currentBuilding.OnBuild += CurrentBuildingWasBuild;
     }
 
@@ -49,9 +51,9 @@ public class BuildManager : MonoBehaviour
         _currentBuilding = null;
     }
 
-    private IEnumerator YieldEndFrame(Action callback)
+    private IEnumerator YieldEndFrame(Action<BuildingData> callback, BuildingData data)
     {
         yield return new WaitForEndOfFrame();
-        callback?.Invoke();
+        callback?.Invoke(data);
     }
 }

@@ -1,8 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
-using System.Linq;
 
 public class UIManager : MonoBehaviour
 {
@@ -12,6 +9,8 @@ public class UIManager : MonoBehaviour
     private EventButton _buildButtonPrefab;
     [SerializeField]
     private Transform _buildButtonsContainer;
+    [SerializeField]
+    private BuildingsConfigSO _buildingsConfig;
 
     private List<EventButton> _buildButtons;
 
@@ -19,13 +18,17 @@ public class UIManager : MonoBehaviour
     {
         _buildButtons = new();
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < _buildingsConfig.BuildingConfigs.Length; i++)
         {
             var button = Instantiate(_buildButtonPrefab, _buildButtonsContainer);
-            button.OnPointerDownEvent += () => GameEvents.OnBuildModeEntered?.Invoke("");
+            var data = _buildingsConfig.BuildingConfigs[i].Data;
+            button.SetIcon(data.Icon);
+            button.OnPointerDownEvent += () => GameEvents.OnBuildModeEntered?.Invoke(data);
             _buildButtons.Add(button);
         }
 
         _destructionButton.OnPointerDownEvent += () => GameEvents.OnDestructionModeEntered?.Invoke();
+        GameEvents.OnDestructionModeEntered += () => _destructionButton.SetColor(Color.yellow);
+        GameEvents.OnBuildModeEntered += (x) => _destructionButton.SetColor(Color.white);
     }
 }

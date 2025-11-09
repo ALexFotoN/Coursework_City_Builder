@@ -8,15 +8,11 @@ public class NewBuilding : Building
     private Material[] _materials;
     [SerializeField] 
     private float _dissolveSpeed = 0.5f;
-    [SerializeField] 
-    private float _minWorldHeight = -10f;
-    [SerializeField] 
-    private float _maxWorldHeight = 10f;
 
     private int _collisionCount;
     private float _currentDissolveAmount;
 
-    public override void Init()
+    public override void Init(BuildingData data)
     {
         IsBuilt = false;
         _currentDissolveAmount = 1f;
@@ -27,8 +23,8 @@ public class NewBuilding : Building
         }
         foreach (var material in _materials)
         {
-            material.SetFloat("_MinWorldHeight", _minWorldHeight);
-            material.SetFloat("_MaxWorldHeight", _maxWorldHeight);
+            material.SetFloat("_MinWorldHeight", data.MinWorldHeight);
+            material.SetFloat("_MaxWorldHeight", data.MaxWorldHeight);
             material.SetFloat("_DissolveAmount", 0f);
         }
         foreach (var material in _materials)

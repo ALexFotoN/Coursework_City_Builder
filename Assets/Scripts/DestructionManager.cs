@@ -24,7 +24,7 @@ public class DestructionManager : MonoBehaviour
         _destructionActive = true;
     }
 
-    private void DestructionModeExit(string id)
+    private void DestructionModeExit(BuildingData data)
     {
         _destructionActive = false;
     }

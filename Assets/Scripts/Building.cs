@@ -33,7 +33,7 @@ public class Building : MonoBehaviour, IDestroyable
 
     public event Action OnBuild;
 
-    public virtual void Init()
+    public virtual void Init(BuildingData data)
     {
 
     }
