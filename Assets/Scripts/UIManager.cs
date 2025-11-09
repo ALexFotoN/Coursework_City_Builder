@@ -23,11 +23,11 @@ public class UIManager : MonoBehaviour
             var button = Instantiate(_buildButtonPrefab, _buildButtonsContainer);
             var data = _buildingsConfig.BuildingConfigs[i].Data;
             button.SetIcon(data.Icon);
-            button.OnPointerDownEvent += () => GameEvents.OnBuildModeEntered?.Invoke(data);
+            button.OnPointerClickEvent += () => GameEvents.OnBuildModeEntered?.Invoke(data);
             _buildButtons.Add(button);
         }
 
-        _destructionButton.OnPointerDownEvent += () => GameEvents.OnDestructionModeEntered?.Invoke();
+        _destructionButton.OnPointerClickEvent += () => GameEvents.OnDestructionModeEntered?.Invoke();
         GameEvents.OnDestructionModeEntered += () => _destructionButton.SetColor(Color.yellow);
         GameEvents.OnBuildModeEntered += (x) => _destructionButton.SetColor(Color.white);
     }

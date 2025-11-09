@@ -13072,8 +13072,7 @@ MonoBehaviour:
   _buildingColider: {fileID: 793611967248809100}
   _materials: []
   _dissolveSpeed: 1
-  _minWorldHeight: -1
-  _maxWorldHeight: 4
+  _rotationSpeed: 10000
 --- !u!65 &793611967248809100
 BoxCollider:
   m_ObjectHideFlags: 0

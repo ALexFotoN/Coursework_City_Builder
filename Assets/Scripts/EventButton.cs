@@ -3,18 +3,18 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class EventButton : MonoBehaviour, IPointerDownHandler
+public class EventButton : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField]
     private Image _iconImage;
     [SerializeField]
     private Image _backImage;
 
-    public event Action OnPointerDownEvent;
+    public event Action OnPointerClickEvent;
 
-    public void OnPointerDown(PointerEventData eventData)
+    public void OnPointerClick(PointerEventData eventData)
     {
-        OnPointerDownEvent?.Invoke();
+        OnPointerClickEvent?.Invoke();
     }
 
     public void SetIcon(Sprite icon)

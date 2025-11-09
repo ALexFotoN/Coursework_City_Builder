@@ -8,6 +8,8 @@ public class NewBuilding : Building
     private Material[] _materials;
     [SerializeField] 
     private float _dissolveSpeed = 0.5f;
+    [SerializeField]
+    private float _rotationSpeed;
 
     private int _collisionCount;
     private float _currentDissolveAmount;
@@ -46,6 +48,12 @@ public class NewBuilding : Building
         {
             transform.position = hit.point;
         }
+
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+
+        float rotationAmount = scroll * _rotationSpeed * Time.deltaTime;
+
+        transform.Rotate(Vector3.up, rotationAmount, Space.World);
 
         if (Input.GetMouseButtonUp(0))
         {
