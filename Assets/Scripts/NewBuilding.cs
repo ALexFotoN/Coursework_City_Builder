@@ -1,0 +1,121 @@
+using UnityEngine;
+using System.Linq;
+using System.Collections;
+
+public class NewBuilding : Building
+{
+    [SerializeField]
+    private Material[] _materials;
+    [SerializeField] 
+    private float _dissolveSpeed = 0.5f;
+    [SerializeField] 
+    private float _minWorldHeight = -10f;
+    [SerializeField] 
+    private float _maxWorldHeight = 10f;
+
+    private int _collisionCount;
+    private float _currentDissolveAmount;
+
+    public override void Init()
+    {
+        IsBuilt = false;
+        _currentDissolveAmount = 1f;
+        _buildingColider.isTrigger = true;
+        if(_materials == null || _materials.Length == 0)
+        {
+            _materials = GetComponentsInChildren<MeshRenderer>().Select(x => x.material).ToArray();
+        }
+        foreach (var material in _materials)
+        {
+            material.SetFloat("_MinWorldHeight", _minWorldHeight);
+            material.SetFloat("_MaxWorldHeight", _maxWorldHeight);
+            material.SetFloat("_DissolveAmount", 0f);
+        }
+        foreach (var material in _materials)
+        {
+            material.SetColor("_BaseColor", Color.cyan);
+        }
+    }
+
+    private void Update()
+    {
+        if (IsBuilt)
+        {
+            return;
+        }
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _groundLayer))
+        {
+            transform.position = hit.point;
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            TryBuild();
+        }
+    }
+
+    private void TryBuild()
+    {
+        if (_collisionCount > 0)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            IsBuilt = true;
+            _buildingColider.isTrigger = false;
+            StartCoroutine(Disolve());
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (IsBuilt)
+        {
+            return;
+        }
+        _collisionCount++;
+        foreach (var material in _materials)
+        {
+            material.SetColor("_BaseColor", Color.red);
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (IsBuilt)
+        {
+            return;
+        }
+        _collisionCount--;
+        if(_collisionCount == 0)
+        {
+            foreach (var material in _materials)
+            {
+                material.SetColor("_BaseColor", Color.cyan);
+            }
+        }
+    }
+
+    private IEnumerator Disolve()
+    {
+        foreach (var material in _materials)
+        {
+            material.SetColor("_BaseColor", Color.white);
+            material.SetFloat("_DissolveAmount", 1f);
+        }
+        while (_currentDissolveAmount > 0f)
+        {
+            _currentDissolveAmount -= _dissolveSpeed * Time.deltaTime;
+            _currentDissolveAmount = Mathf.Clamp01(_currentDissolveAmount);
+            foreach (var material in _materials)
+            {
+                material.SetFloat("_DissolveAmount", _currentDissolveAmount);
+            }
+            yield return null;
+        }
+    }
+}

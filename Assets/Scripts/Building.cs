@@ -1,0 +1,49 @@
+using UnityEngine;
+using System;
+using DG.Tweening;
+using Random = UnityEngine.Random;
+
+public class Building : MonoBehaviour, IDestroyable
+{
+    [SerializeField]
+    protected Transform _buildingObject;
+    [SerializeField]
+    protected ParticleSystem _particle;
+    [SerializeField]
+    protected LayerMask _groundLayer;
+    [SerializeField]
+    protected Collider _buildingColider;
+
+    private bool _isBuilt = true;
+    protected bool IsBuilt
+    {
+        get
+        {
+            return _isBuilt;
+        }
+        set
+        {
+            if (value)
+            {
+                OnBuild?.Invoke();
+            }
+            _isBuilt = value;
+        }
+    }
+
+    public event Action OnBuild;
+
+    public virtual void Init()
+    {
+
+    }
+
+    public void Remove()
+    {
+        _particle.Play(true);
+        _buildingObject.DOMoveY(-4, 2.5f).SetEase(Ease.InExpo);
+        _buildingObject.DOLocalRotate(new Vector3(Random.Range(-7, 7), 0, Random.Range(-7, 7)), 1);
+        _buildingColider.enabled = false;
+        Destroy(gameObject, 7);
+    }
+}
