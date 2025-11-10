@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Linq;
 using System.Collections;
+using DG.Tweening;
 
 public class NewBuilding : Building
 {
@@ -19,8 +20,11 @@ public class NewBuilding : Building
         base.Init(data);
         IsBuilt = false;
         _currentDissolveAmount = 1f;
+        _buildingColider.enabled = true;
         _buildingColider.isTrigger = true;
         _collisionCount = 0;
+        _buildingObject.DOMoveY(0,0);
+        _buildingObject.DORotate(new Vector3(0, _buildingObject.transform.rotation.eulerAngles.y, 0), 0);
         if (_materials == null || _materials.Length == 0)
         {
             _materials = GetComponentsInChildren<MeshRenderer>().Select(x => x.material).ToArray();
