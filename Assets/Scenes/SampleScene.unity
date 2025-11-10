@@ -1794,7 +1794,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4008743005133744568, guid: 1d63198f69333a14685b70ae2efb431a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.5
+      value: -3.93
       objectReference: {fileID: 0}
     - target: {fileID: 4008743005133744568, guid: 1d63198f69333a14685b70ae2efb431a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1802,7 +1802,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4008743005133744568, guid: 1d63198f69333a14685b70ae2efb431a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.66
+      value: -7.84
       objectReference: {fileID: 0}
     - target: {fileID: 4008743005133744568, guid: 1d63198f69333a14685b70ae2efb431a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2931,6 +2931,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuildManager
   _pool: {fileID: 2054221215}
+  _terrainController: {fileID: 0}
+  _textureIndex: 1
+  _radius: 5
 --- !u!4 &919246775
 Transform:
   m_ObjectHideFlags: 0
