@@ -44,7 +44,7 @@ public class Building : MonoBehaviour, IDestroyable
     {
         _particle.Play(true);
         _buildingObject.DOMoveY(_removeConfig.FallPosition, _removeConfig.FallDuration).SetEase(Ease.InExpo);
-        _buildingObject.DOLocalRotate(_buildingObject.transform.rotation.eulerAngles + 
+        _buildingObject.DORotate(_buildingObject.transform.rotation.eulerAngles + 
             new Vector3(Random.Range(_removeConfig.RotateDispersion.x, _removeConfig.RotateDispersion.y), 0, 
             Random.Range(_removeConfig.RotateDispersion.x, _removeConfig.RotateDispersion.y)), _removeConfig.RotateDuration);
         _buildingColider.enabled = false;

@@ -9780,7 +9780,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cec21051a53b25c40873d03d009f48ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OldBuilding
-  _buildingObject: {fileID: 0}
+  _buildingObject: {fileID: 7200169827159291990}
   _particle: {fileID: 1059408554021656814}
   _groundLayer:
     serializedVersion: 2
