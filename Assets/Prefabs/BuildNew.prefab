@@ -13070,6 +13070,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   _buildingColider: {fileID: 793611967248809100}
+  _removeConfig: {fileID: 11400000, guid: 32277c6ceed0ff44a89ea993fe711844, type: 2}
   _materials: []
   _dissolveSpeed: 1
   _rotationSpeed: 10000

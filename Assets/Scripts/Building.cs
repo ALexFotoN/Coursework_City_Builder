@@ -13,6 +13,8 @@ public class Building : MonoBehaviour, IDestroyable
     protected LayerMask _groundLayer;
     [SerializeField]
     protected Collider _buildingColider;
+    [SerializeField]
+    protected RemoveBuildingConfigSO _removeConfig;
 
     private bool _isBuilt = true;
     protected bool IsBuilt
@@ -41,9 +43,11 @@ public class Building : MonoBehaviour, IDestroyable
     public void Remove()
     {
         _particle.Play(true);
-        _buildingObject.DOMoveY(-4, 2.5f).SetEase(Ease.InExpo);
-        _buildingObject.DOLocalRotate(new Vector3(Random.Range(-7, 7), 0, Random.Range(-7, 7)), 1);
+        _buildingObject.DOMoveY(_removeConfig.FallPosition, _removeConfig.FallDuration).SetEase(Ease.InExpo);
+        _buildingObject.DOLocalRotate(_buildingObject.transform.rotation.eulerAngles + 
+            new Vector3(Random.Range(_removeConfig.RotateDispersion.x, _removeConfig.RotateDispersion.y), 0, 
+            Random.Range(_removeConfig.RotateDispersion.x, _removeConfig.RotateDispersion.y)), _removeConfig.RotateDuration);
         _buildingColider.enabled = false;
-        Destroy(gameObject, 7);
+        Destroy(gameObject, _removeConfig.TimeToReturn);
     }
 }
