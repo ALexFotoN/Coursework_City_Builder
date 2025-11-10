@@ -16,10 +16,12 @@ public class NewBuilding : Building
 
     public override void Init(BuildingData data)
     {
+        base.Init(data);
         IsBuilt = false;
         _currentDissolveAmount = 1f;
         _buildingColider.isTrigger = true;
-        if(_materials == null || _materials.Length == 0)
+        _collisionCount = 0;
+        if (_materials == null || _materials.Length == 0)
         {
             _materials = GetComponentsInChildren<MeshRenderer>().Select(x => x.material).ToArray();
         }
@@ -65,7 +67,7 @@ public class NewBuilding : Building
     {
         if (_collisionCount > 0)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
         else
         {

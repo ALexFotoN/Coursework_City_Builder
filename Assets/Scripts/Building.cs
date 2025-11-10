@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using DG.Tweening;
 using Random = UnityEngine.Random;
+using System.Collections;
 
 public class Building : MonoBehaviour, IDestroyable
 {
@@ -15,6 +16,9 @@ public class Building : MonoBehaviour, IDestroyable
     protected Collider _buildingColider;
     [SerializeField]
     protected RemoveBuildingConfigSO _removeConfig;
+    
+    private string _buildingId;
+    public string BuildingId => _buildingId;
 
     private bool _isBuilt = true;
     protected bool IsBuilt
@@ -37,7 +41,7 @@ public class Building : MonoBehaviour, IDestroyable
 
     public virtual void Init(BuildingData data)
     {
-
+        _buildingId = data.Id;
     }
 
     public void Remove()
@@ -48,6 +52,12 @@ public class Building : MonoBehaviour, IDestroyable
             new Vector3(Random.Range(_removeConfig.RotateDispersion.x, _removeConfig.RotateDispersion.y), 0, 
             Random.Range(_removeConfig.RotateDispersion.x, _removeConfig.RotateDispersion.y)), _removeConfig.RotateDuration);
         _buildingColider.enabled = false;
-        Destroy(gameObject, _removeConfig.TimeToReturn);
+        StartCoroutine(DelayToReturn());
+    }
+
+    private IEnumerator DelayToReturn()
+    {
+        yield return new WaitForSeconds(_removeConfig.TimeToReturn);
+        gameObject.SetActive(false);
     }
 }

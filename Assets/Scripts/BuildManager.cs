@@ -5,6 +5,9 @@ using System.Linq;
 
 public class BuildManager : MonoBehaviour
 {
+    [SerializeField]
+    private BuildingPool _pool;
+
     private Building _currentBuilding;
 
     private void Awake()
@@ -30,7 +33,7 @@ public class BuildManager : MonoBehaviour
         {
             return;
         }
-        Destroy(_currentBuilding.gameObject);
+        _currentBuilding.gameObject.SetActive(false);
         _currentBuilding = null;
     }
 
@@ -40,13 +43,22 @@ public class BuildManager : MonoBehaviour
         {
             return;
         }
-        _currentBuilding = Instantiate(data.Prefab);
+        if (_currentBuilding)
+        {
+            _currentBuilding.gameObject.SetActive(false);
+        }
+        _currentBuilding = _pool.GetBuilding(data);
         _currentBuilding.Init(data);
         _currentBuilding.OnBuild += CurrentBuildingWasBuild;
+        _currentBuilding.gameObject.SetActive(true);
     }
 
     private void CurrentBuildingWasBuild()
     {
+        if (!_currentBuilding)
+        {
+            return;
+        }
         _currentBuilding.OnBuild -= CurrentBuildingWasBuild;
         _currentBuilding = null;
     }
