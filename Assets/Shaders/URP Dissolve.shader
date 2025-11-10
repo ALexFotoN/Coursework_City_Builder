@@ -10,7 +10,7 @@ Shader "Custom/DissolveTopDown"
         _EdgeWidth("Edge Width", Range(0, 0.2)) = 0.05
         _EdgeColor("Edge Color", Color) = (1,0,0,1)
         _EdgeIntensity("Edge Intensity", Float) = 2
-        _MaxWorldHeight("Max World Height", Float) = 0
+        _MaxWorldHeight("Max World Height", Float) = 10
         _MinWorldHeight("Min World Height", Float) = 0
     }
 
@@ -85,10 +85,14 @@ Shader "Custom/DissolveTopDown"
 
             half4 frag(Varyings IN) : SV_Target
             {
+                float heightRange = _MaxWorldHeight - _MinWorldHeight;
+                if (abs(heightRange) < 0.001)
+                {
+                    heightRange = 1.0;
+                }
+
                 float worldHeight = IN.positionWS.y;
-                float maxWorldHeight = _MaxWorldHeight;
-                float minWorldHeight = _MinWorldHeight;
-                float normalizedHeight = (worldHeight - minWorldHeight) / (maxWorldHeight - minWorldHeight);
+                float normalizedHeight = saturate((worldHeight - _MinWorldHeight) / heightRange);
                 
                 normalizedHeight = 1.0 - normalizedHeight;
                 

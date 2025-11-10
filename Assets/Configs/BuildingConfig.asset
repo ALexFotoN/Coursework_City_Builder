@@ -15,6 +15,6 @@ MonoBehaviour:
   _data:
     Id: build
     Icon: {fileID: 21300000, guid: 376ca560682e654418fd56e2187e147d, type: 3}
-    Prefab: {fileID: 1017206655134273925, guid: fc55e74551a11734c86b528dfa6f1daf, type: 3}
+    Prefab: {fileID: 1017206655134273925, guid: 3cef99fa472217f4b95e0b16a97258fa, type: 3}
     MinWorldHeight: -1
     MaxWorldHeight: 4
