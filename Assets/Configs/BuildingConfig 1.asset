@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BuildingDataConfigSO
   _data:
     Id: build1
-    Icon: {fileID: 21300000, guid: 89b507da9702b7e4a9e19c4229a279d7, type: 3}
+    Icon: {fileID: 21300000, guid: 5d021ab3463df344a8972102e055fbfd, type: 3}
     Prefab: {fileID: 1017206655134273925, guid: 989376bc7c4305145a14a141fe14932a, type: 3}
     MinWorldHeight: -1
     MaxWorldHeight: 4

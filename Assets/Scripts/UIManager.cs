@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class UIManager : MonoBehaviour
     private Transform _buildButtonsContainer;
     [SerializeField]
     private BuildingsConfigSO _buildingsConfig;
+    [SerializeField]
+    private Button _exitButton;
 
     private List<EventButton> _buildButtons;
 
@@ -30,5 +33,12 @@ public class UIManager : MonoBehaviour
         _destructionButton.OnPointerClickEvent += () => GameEvents.OnDestructionModeEntered?.Invoke();
         GameEvents.OnDestructionModeEntered += () => _destructionButton.SetColor(Color.yellow);
         GameEvents.OnBuildModeEntered += (x) => _destructionButton.SetColor(Color.white);
+
+        _exitButton.onClick.AddListener(ExitGame);
+    }
+
+    private void ExitGame()
+    {
+        Application.Quit();
     }
 }
