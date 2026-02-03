@@ -8,6 +8,10 @@ public class BuildingData
     public Sprite Icon;
     public Building Prefab;
 
+    [Header("Data")]
+    public int Cost;
+    public float Happy;
+
     [Header("Disolve Shader")]
     public float MinWorldHeight = -1f;
     public float MaxWorldHeight = 4f;

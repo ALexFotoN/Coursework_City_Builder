@@ -1,0 +1,20 @@
+using TMPro;
+using UnityEngine;
+
+public class MoneyManager : MonoBehaviour
+{
+    [SerializeField]
+    private TMP_Text _totalMoneyText;
+    private int _totalMoney;
+
+    private void Start()
+    {
+        ChangeValue(5000);
+    }
+
+    private void ChangeValue(int value)
+    {
+        _totalMoney += value;
+        _totalMoneyText.text = $"{_totalMoney}";
+    }
+}
