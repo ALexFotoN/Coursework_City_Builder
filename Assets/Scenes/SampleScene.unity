@@ -1509,6 +1509,7 @@ MonoBehaviour:
   _buildingsLayer:
     serializedVersion: 2
     m_Bits: 64
+  _destructionCost: 100
 --- !u!4 &604657227
 Transform:
   m_ObjectHideFlags: 0
@@ -6075,7 +6076,7 @@ SceneRoots:
   - {fileID: 919246775}
   - {fileID: 604657227}
   - {fileID: 1759511572}
-  - {fileID: 744438448}
   - {fileID: 2054221216}
   - {fileID: 1673636188}
   - {fileID: 1946962668}
+  - {fileID: 744438448}

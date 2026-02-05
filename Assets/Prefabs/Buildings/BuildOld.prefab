@@ -9787,6 +9787,7 @@ MonoBehaviour:
     m_Bits: 1
   _buildingColider: {fileID: 498341826786230969}
   _removeConfig: {fileID: 11400000, guid: 32277c6ceed0ff44a89ea993fe711844, type: 2}
+  _defaultData: {fileID: 11400000, guid: bbd262fafca2466449ce94cdde674761, type: 2}
 --- !u!65 &498341826786230969
 BoxCollider:
   m_ObjectHideFlags: 0

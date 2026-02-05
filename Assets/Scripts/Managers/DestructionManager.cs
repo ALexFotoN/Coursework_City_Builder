@@ -4,6 +4,8 @@ public class DestructionManager : MonoBehaviour
 {
     [SerializeField]
     private LayerMask _buildingsLayer;
+    [SerializeField]
+    private int _destructionCost;
 
     private bool _destructionActive;
 
@@ -50,6 +52,10 @@ public class DestructionManager : MonoBehaviour
         {
             if (hit.collider.TryGetComponent(out IDestroyable destroyable))
             {
+                if (!MoneyManager.Instance.TrySpend(_destructionCost))
+                {
+                    return;
+                }
                 destroyable.Remove();
             }
         }

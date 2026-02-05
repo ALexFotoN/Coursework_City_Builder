@@ -16,9 +16,12 @@ public class Building : MonoBehaviour, IDestroyable
     protected Collider _buildingColider;
     [SerializeField]
     protected RemoveBuildingConfigSO _removeConfig;
-    
-    private string _buildingId;
-    public string BuildingId => _buildingId;
+    [SerializeField]
+    protected BuildingDataConfigSO _defaultData;
+
+    protected BuildingData _data;
+    public BuildingData Data => _data;
+    public string BuildingId => _data.Id;
 
     private bool _isBuilt = true;
     protected bool IsBuilt
@@ -31,6 +34,7 @@ public class Building : MonoBehaviour, IDestroyable
         {
             if (value)
             {
+                GameEvents.OnBuildingWasBuild?.Invoke(_data);
                 OnBuild?.Invoke();
             }
             _isBuilt = value;
@@ -39,9 +43,15 @@ public class Building : MonoBehaviour, IDestroyable
 
     public event Action OnBuild;
 
+    private void Awake()
+    {
+        if(_defaultData)
+            _data = _defaultData.Data;
+    }
+
     public virtual void Init(BuildingData data)
     {
-        _buildingId = data.Id;
+        _data = data;
     }
 
     public void Remove()
@@ -53,6 +63,7 @@ public class Building : MonoBehaviour, IDestroyable
             Random.Range(_removeConfig.RotateDispersion.x, _removeConfig.RotateDispersion.y)), _removeConfig.RotateDuration);
         _buildingColider.enabled = false;
         StartCoroutine(DelayToReturn());
+        GameEvents.OnBuildingWasDestroy?.Invoke(_data);
     }
 
     private IEnumerator DelayToReturn()

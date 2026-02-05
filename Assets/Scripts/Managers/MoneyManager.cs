@@ -7,6 +7,21 @@ public class MoneyManager : MonoBehaviour
     private TMP_Text _totalMoneyText;
     private int _totalMoney;
 
+    #region Singleton
+    private static MoneyManager _instance;
+    public static MoneyManager Instance => _instance;
+
+    private void Awake()
+    {
+        if (_instance)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        _instance = this;
+    }
+    #endregion
+
     private void Start()
     {
         ChangeValue(5000);
@@ -16,5 +31,15 @@ public class MoneyManager : MonoBehaviour
     {
         _totalMoney += value;
         _totalMoneyText.text = $"{_totalMoney}";
+    }
+
+    public bool TrySpend(int value)
+    {
+        if(_totalMoney - value < 0)
+        {
+            return false;
+        }
+        ChangeValue(-value);
+        return true;
     }
 }

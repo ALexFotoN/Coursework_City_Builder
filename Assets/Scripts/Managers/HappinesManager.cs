@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using System.Linq;
 
 public class HappinesManager : MonoBehaviour
 {
@@ -9,7 +10,13 @@ public class HappinesManager : MonoBehaviour
 
     private void Start()
     {
-        ChangeValue(20);
+        GameEvents.OnBuildingWasBuild += (x) => ChangeValue(x.Happy);
+        GameEvents.OnBuildingWasDestroy += (x) => ChangeValue(-x.Happy);
+
+        var startBuildings = FindObjectsByType<Building>(FindObjectsSortMode.None);
+        var startHappines = startBuildings.Sum(x => x.Data.Happy);
+
+        ChangeValue(startHappines);
     }
 
     private void ChangeValue(int value)

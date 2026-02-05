@@ -69,7 +69,7 @@ public class NewBuilding : Building
 
     private void TryBuild()
     {
-        if (_collisionCount > 0)
+        if (_collisionCount > 0 || !MoneyManager.Instance.TrySpend(_data.Cost))
         {
             gameObject.SetActive(false);
         }
