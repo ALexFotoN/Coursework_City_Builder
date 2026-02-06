@@ -1,12 +1,15 @@
 using TMPro;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class HappinesManager : MonoBehaviour, IService
 {
     [SerializeField]
     private TMP_Text _totalHappyText;
     private int _totalHappy;
+
+    public Action<int> OnChangeValue;
 
     private void Start()
     {
@@ -20,5 +23,6 @@ public class HappinesManager : MonoBehaviour, IService
     {
         _totalHappy += value;
         _totalHappyText.text = $"{_totalHappy}";
+        OnChangeValue?.Invoke(_totalHappy);
     }
 }

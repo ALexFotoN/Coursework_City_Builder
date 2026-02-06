@@ -14,6 +14,9 @@ public class ServiceLocatorLoader : MonoBehaviour
     [SerializeField]
     private MoneyManager _moneyManager;
     public MoneyManager MoneyManager => _moneyManager;
+    [SerializeField]
+    private UIManager _uiManager;
+    public UIManager UIManager => _uiManager;
 
     private void Awake()
     {
@@ -22,5 +25,6 @@ public class ServiceLocatorLoader : MonoBehaviour
         ServiceLocator.CurrentSericeLocator.RegisterService<DestructionManager>(_destructionManager);
         ServiceLocator.CurrentSericeLocator.RegisterService<HappinesManager>(_happinesManager);
         ServiceLocator.CurrentSericeLocator.RegisterService<MoneyManager>(_moneyManager);
+        ServiceLocator.CurrentSericeLocator.RegisterService<UIManager>(_uiManager);
     }
 }

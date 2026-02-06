@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class UIManager : MonoBehaviour, IService
 {
     [SerializeField]
     private EventButton _destructionButton;
@@ -14,6 +14,9 @@ public class UIManager : MonoBehaviour
     private BuildingsConfigSO _buildingsConfig;
     [SerializeField]
     private Button _exitButton;
+    [SerializeField]
+    private TitlePopUp _titlePopUp;
+    public TitlePopUp TitlePopUp => _titlePopUp;
 
     private List<EventButton> _buildButtons;
 
