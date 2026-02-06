@@ -1,34 +1,34 @@
 using UnityEngine;
 
-public class DestructionManager : MonoBehaviour
+public class DestructionManager : MonoBehaviour, IService
 {
     [SerializeField]
     private LayerMask _buildingsLayer;
     [SerializeField]
     private int _destructionCost;
+    [SerializeField]
+    private Texture2D _destructionCursor;
 
     private bool _destructionActive;
 
+    private MoneyManager _moneyManager;
+
     private void Awake()
     {
-        GameEvents.OnDestructionModeEntered += DestructionModeEnter;
-        GameEvents.OnBuildModeEntered += DestructionModeExit;
+        _moneyManager = ServiceLocator.CurrentSericeLocator.GetServise<MoneyManager>();
     }
 
-    private void OnDestroy()
-    {
-        GameEvents.OnDestructionModeEntered -= DestructionModeEnter;
-        GameEvents.OnBuildModeEntered -= DestructionModeExit;
-    }
-
-    private void DestructionModeEnter()
+    public void DestructionModeEnter()
     {
         _destructionActive = true;
+
+        Cursor.SetCursor(_destructionCursor, new Vector2(511.5f, 511.5f), CursorMode.ForceSoftware);
     }
 
-    private void DestructionModeExit(BuildingData data)
+    public void DestructionModeExit()
     {
         _destructionActive = false;
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
     }
 
     private void Update()
@@ -42,6 +42,10 @@ public class DestructionManager : MonoBehaviour
         {
             TryToDestroyBuilding();
         }
+        if (Input.GetMouseButtonUp(1))
+        {
+            DestructionModeExit();
+        }
     }
 
     private void TryToDestroyBuilding()
@@ -52,7 +56,7 @@ public class DestructionManager : MonoBehaviour
         {
             if (hit.collider.TryGetComponent(out IDestroyable destroyable))
             {
-                if (!MoneyManager.Instance.TrySpend(_destructionCost))
+                if (!_moneyManager.TrySpend(_destructionCost))
                 {
                     return;
                 }

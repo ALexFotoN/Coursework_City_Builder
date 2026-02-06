@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using System.Linq;
 
-public class HappinesManager : MonoBehaviour
+public class HappinesManager : MonoBehaviour, IService
 {
     [SerializeField]
     private TMP_Text _totalHappyText;
@@ -10,16 +10,13 @@ public class HappinesManager : MonoBehaviour
 
     private void Start()
     {
-        GameEvents.OnBuildingWasBuild += (x) => ChangeValue(x.Happy);
-        GameEvents.OnBuildingWasDestroy += (x) => ChangeValue(-x.Happy);
-
         var startBuildings = FindObjectsByType<Building>(FindObjectsSortMode.None);
         var startHappines = startBuildings.Sum(x => x.Data.Happy);
 
         ChangeValue(startHappines);
     }
 
-    private void ChangeValue(int value)
+    public void ChangeValue(int value)
     {
         _totalHappy += value;
         _totalHappyText.text = $"{_totalHappy}";

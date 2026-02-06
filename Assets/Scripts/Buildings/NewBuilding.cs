@@ -65,11 +65,15 @@ public class NewBuilding : Building
         {
             TryBuild();
         }
+        if (Input.GetMouseButtonUp(1))
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     private void TryBuild()
     {
-        if (_collisionCount > 0 || !MoneyManager.Instance.TrySpend(_data.Cost))
+        if (_collisionCount > 0 || !_moneyManager.TrySpend(_data.Cost))
         {
             gameObject.SetActive(false);
         }

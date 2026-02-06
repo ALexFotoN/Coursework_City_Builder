@@ -34,7 +34,7 @@ public class Building : MonoBehaviour, IDestroyable
         {
             if (value)
             {
-                GameEvents.OnBuildingWasBuild?.Invoke(_data);
+                _happinesManager.ChangeValue(_data.Happy);
                 OnBuild?.Invoke();
             }
             _isBuilt = value;
@@ -43,9 +43,15 @@ public class Building : MonoBehaviour, IDestroyable
 
     public event Action OnBuild;
 
+    protected MoneyManager _moneyManager;
+    private HappinesManager _happinesManager;
+
     private void Awake()
     {
-        if(_defaultData)
+        _moneyManager = ServiceLocator.CurrentSericeLocator.GetServise<MoneyManager>();
+        _happinesManager = ServiceLocator.CurrentSericeLocator.GetServise<HappinesManager>();
+
+        if (_defaultData)
             _data = _defaultData.Data;
     }
 
@@ -63,7 +69,7 @@ public class Building : MonoBehaviour, IDestroyable
             Random.Range(_removeConfig.RotateDispersion.x, _removeConfig.RotateDispersion.y)), _removeConfig.RotateDuration);
         _buildingColider.enabled = false;
         StartCoroutine(DelayToReturn());
-        GameEvents.OnBuildingWasDestroy?.Invoke(_data);
+        _happinesManager.ChangeValue(-_data.Happy);
     }
 
     private IEnumerator DelayToReturn()

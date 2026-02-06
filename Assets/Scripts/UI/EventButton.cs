@@ -11,21 +11,28 @@ public class EventButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     [SerializeField]
     private Image _backImage;
 
-    public event Action OnPointerClickEvent;
+    private BuildingData _data;
+    public BuildingData Data => _data;
 
+    public event Action OnPointerClickEvent;
+    
     public void OnPointerClick(PointerEventData eventData)
     {
         OnPointerClickEvent?.Invoke();
     }
 
-    public void SetIcon(Sprite icon)
+    public void SetData(BuildingData data)
     {
-        _iconImage.sprite = icon;
+        _data = data;
+        _iconImage.sprite = _data.Icon;
     }
 
-    public void SetColor(Color color)
+    public void SetColor(EventButton button)
     {
-        _backImage.color = color;
+        if(button == this)
+            _backImage.color = Color.yellow;
+        else
+            _backImage.color = Color.white;
     }
 
     public void OnPointerEnter(PointerEventData eventData)

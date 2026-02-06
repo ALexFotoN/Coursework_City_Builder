@@ -1,26 +1,11 @@
 using TMPro;
 using UnityEngine;
 
-public class MoneyManager : MonoBehaviour
+public class MoneyManager : MonoBehaviour, IService
 {
     [SerializeField]
     private TMP_Text _totalMoneyText;
     private int _totalMoney;
-
-    #region Singleton
-    private static MoneyManager _instance;
-    public static MoneyManager Instance => _instance;
-
-    private void Awake()
-    {
-        if (_instance)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        _instance = this;
-    }
-    #endregion
 
     private void Start()
     {

@@ -2,31 +2,19 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class BuildManager : MonoBehaviour
+public class BuildManager : MonoBehaviour, IService
 {
     [SerializeField]
     private BuildingPool _pool;
 
     private Building _currentBuilding;
 
-    private void Awake()
-    {
-        GameEvents.OnBuildModeEntered += BuildModeEnter;
-        GameEvents.OnDestructionModeEntered += BuildModeExit;
-    }
-
-    private void OnDestroy()
-    {
-        GameEvents.OnBuildModeEntered -= BuildModeEnter;
-        GameEvents.OnDestructionModeEntered -= BuildModeExit;
-    }
-
-    private void BuildModeEnter(BuildingData data)
+    public void BuildModeEnter(BuildingData data)
     {
         StartCoroutine(YieldEndFrame(CreateBuilding, data));
     }
 
-    private void BuildModeExit()
+    public void BuildModeExit()
     {
         if (!_currentBuilding)
         {

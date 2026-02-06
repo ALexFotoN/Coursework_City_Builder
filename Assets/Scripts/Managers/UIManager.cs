@@ -19,20 +19,23 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
+        var buildManager = ServiceLocator.CurrentSericeLocator.GetServise<BuildManager>();
+        var destructionManager = ServiceLocator.CurrentSericeLocator.GetServise<DestructionManager>();
+
         _buildButtons = new();
 
         for (int i = 0; i < _buildingsConfig.BuildingConfigs.Length; i++)
         {
             var button = Instantiate(_buildButtonPrefab, _buildButtonsContainer);
             var data = _buildingsConfig.BuildingConfigs[i].Data;
-            button.SetIcon(data.Icon);
-            button.OnPointerClickEvent += () => GameEvents.OnBuildModeEntered?.Invoke(data);
+            button.SetData(data);
+            button.OnPointerClickEvent += () => buildManager.BuildModeEnter(data);
+            button.OnPointerClickEvent += () => destructionManager.DestructionModeExit();
             _buildButtons.Add(button);
         }
 
-        _destructionButton.OnPointerClickEvent += () => GameEvents.OnDestructionModeEntered?.Invoke();
-        GameEvents.OnDestructionModeEntered += () => _destructionButton.SetColor(Color.yellow);
-        GameEvents.OnBuildModeEntered += (x) => _destructionButton.SetColor(Color.white);
+        _destructionButton.OnPointerClickEvent += () => buildManager.BuildModeExit();
+        _destructionButton.OnPointerClickEvent += () => destructionManager.DestructionModeEnter();
 
         _exitButton.onClick.AddListener(ExitGame);
     }
