@@ -1230,8 +1230,7 @@ RectTransform:
   m_Children:
   - {fileID: 1491683179}
   - {fileID: 280306050}
-  - {fileID: 684414544}
-  - {fileID: 1674375230}
+  - {fileID: 2004782985}
   - {fileID: 1985710800}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1284,7 +1283,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a87f3bd16e217249b2507bbbe952ee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoneyManager
-  _totalMoneyText: {fileID: 684414542}
 --- !u!1001 &508789602
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1954,12 +1952,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 684414541}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 439701912}
+  m_Father: {fileID: 2004782985}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -4629,6 +4627,7 @@ GameObject:
   - component: {fileID: 1491683179}
   - component: {fileID: 1491683180}
   - component: {fileID: 1491683181}
+  - component: {fileID: 1491683182}
   m_Layer: 5
   m_Name: Buttons
   m_TagString: Untagged
@@ -4698,6 +4697,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
   m_HorizontalFit: 2
   m_VerticalFit: 2
+--- !u!114 &1491683182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1491683178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0c0879bf9755004a8a9407119d6220b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ActionButtonsView
+  _destructionButton: {fileID: 916799935}
+  _buildButtonPrefab: {fileID: 8611177201820715654, guid: b8adbc17f75df8147b72cc1679019f2b, type: 3}
+  _buildButtonsContainer: {fileID: 1491683179}
+  _buildingsConfig: {fileID: 11400000, guid: 60d2e21402dfac940bf9f1014453674a, type: 2}
+  _rect: {fileID: 1491683179}
 --- !u!4 &1499371581 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4008743005133744568, guid: e655836e695e2c14bbd97ea5c7740c8d, type: 3}
@@ -5043,6 +5059,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TaskManager
   _targetHappines: 200
+  _startMoney: 500
 --- !u!1 &1674375227
 GameObject:
   m_ObjectHideFlags: 0
@@ -5167,12 +5184,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1674375227}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 439701912}
+  m_Father: {fileID: 2004782985}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -5323,12 +5340,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37f51a1eea6394f4eb8aa4b7a39171da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
-  _destructionButton: {fileID: 916799935}
-  _buildButtonPrefab: {fileID: 8611177201820715654, guid: b8adbc17f75df8147b72cc1679019f2b, type: 3}
-  _buildButtonsContainer: {fileID: 1491683179}
-  _buildingsConfig: {fileID: 11400000, guid: 60d2e21402dfac940bf9f1014453674a, type: 2}
+  _timeToAnimation: 1.5
   _exitButton: {fileID: 280306047}
+  _resourcesView: {fileID: 2004782986}
   _titlePopUp: {fileID: 1985710801}
+  _actionButtonsView: {fileID: 1491683182}
 --- !u!4 &1759511572
 Transform:
   m_ObjectHideFlags: 0
@@ -5791,7 +5807,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7379ea1ec44214244b24b439b64afc5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HappinesManager
-  _totalHappyText: {fileID: 1674375228}
 --- !u!1001 &1950486708
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6000,6 +6015,59 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4008743005133744568, guid: 1d63198f69333a14685b70ae2efb431a, type: 3}
   m_PrefabInstance: {fileID: 1103364684}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2004782984
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2004782985}
+  - component: {fileID: 2004782986}
+  m_Layer: 5
+  m_Name: ResourcesView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2004782985
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004782984}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 684414544}
+  - {fileID: 1674375230}
+  m_Father: {fileID: 439701912}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2004782986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004782984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f645c24ea1f4ef4697e3a2404ee7ddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ResourcesView
+  _moneyText: {fileID: 684414542}
+  _happyText: {fileID: 1674375228}
+  _rect: {fileID: 2004782985}
 --- !u!1 &2054221214
 GameObject:
   m_ObjectHideFlags: 0

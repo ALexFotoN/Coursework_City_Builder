@@ -4,21 +4,20 @@ using UnityEngine;
 
 public class MoneyManager : MonoBehaviour, IService
 {
-    [SerializeField]
-    private TMP_Text _totalMoneyText;
     private int _totalMoney;
+    private UIManager _uiManager;
 
     public Action<int> OnChangeValue;
 
-    private void Start()
+    private void Awake()
     {
-        ChangeValue(5000);
+        _uiManager = ServiceLocator.CurrentSericeLocator.GetServise<UIManager>();
     }
 
-    private void ChangeValue(int value)
+    public void ChangeValue(int value)
     {
         _totalMoney += value;
-        _totalMoneyText.text = $"{_totalMoney}";
+        _uiManager.ResourcesView.Money = $"{_totalMoney}";
         OnChangeValue?.Invoke(_totalMoney);
     }
 
@@ -26,6 +25,7 @@ public class MoneyManager : MonoBehaviour, IService
     {
         if(_totalMoney - value < 0)
         {
+            OnChangeValue?.Invoke(0);
             return false;
         }
         ChangeValue(-value);

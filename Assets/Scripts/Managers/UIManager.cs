@@ -1,50 +1,54 @@
-using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour, IService
 {
     [SerializeField]
-    private EventButton _destructionButton;
-    [SerializeField]
-    private EventButton _buildButtonPrefab;
-    [SerializeField]
-    private Transform _buildButtonsContainer;
-    [SerializeField]
-    private BuildingsConfigSO _buildingsConfig;
+    private float _timeToAnimation = 0.5f;
     [SerializeField]
     private Button _exitButton;
     [SerializeField]
+    private ResourcesView _resourcesView;
+    public ResourcesView ResourcesView => _resourcesView;
+    [SerializeField]
     private TitlePopUp _titlePopUp;
     public TitlePopUp TitlePopUp => _titlePopUp;
+    [SerializeField]
+    private ActionButtonsView _actionButtonsView;
+    public ActionButtonsView ActionButtonsView => _actionButtonsView;
 
-    private List<EventButton> _buildButtons;
+    private float _resourcesViewY;
+    private float _exitButtonY;
+    private float _actionButtonsViewY;
 
     private void Awake()
     {
-        var buildManager = ServiceLocator.CurrentSericeLocator.GetServise<BuildManager>();
-        var destructionManager = ServiceLocator.CurrentSericeLocator.GetServise<DestructionManager>();
-
-        _buildButtons = new();
-
-        for (int i = 0; i < _buildingsConfig.BuildingConfigs.Length; i++)
-        {
-            var button = Instantiate(_buildButtonPrefab, _buildButtonsContainer);
-            var data = _buildingsConfig.BuildingConfigs[i].Data;
-            button.SetData(data);
-            button.OnPointerClickEvent += () => buildManager.BuildModeEnter(data);
-            button.OnPointerClickEvent += () => destructionManager.DestructionModeExit();
-            _buildButtons.Add(button);
-        }
-
-        _destructionButton.OnPointerClickEvent += () => buildManager.BuildModeExit();
-        _destructionButton.OnPointerClickEvent += () => destructionManager.DestructionModeEnter();
-
         _exitButton.onClick.AddListener(ExitGame);
+
+        _resourcesViewY = _resourcesView.Rect.anchoredPosition.y;
+        _exitButtonY = _exitButton.targetGraphic.rectTransform.anchoredPosition.y;
+        _actionButtonsViewY = _actionButtonsView.Rect.anchoredPosition.y;
+
+        HideUI(true);
     }
 
     private void ExitGame()
     {
         Application.Quit();
+    }
+
+    public void ShowUI()
+    {
+        _resourcesView.Rect.DOAnchorPosY(_resourcesViewY, _timeToAnimation);
+        _exitButton.targetGraphic.rectTransform.DOAnchorPosY(_exitButtonY, _timeToAnimation);
+        _actionButtonsView.Rect.DOAnchorPosY(_actionButtonsViewY, _timeToAnimation);
+    }
+
+    public void HideUI(bool force = false)
+    {
+        _resourcesView.Rect.DOAnchorPosY(200, force ? 0 : _timeToAnimation);
+        _exitButton.targetGraphic.rectTransform.DOAnchorPosY(200, force ? 0 : _timeToAnimation);
+        _actionButtonsView.Rect.DOAnchorPosY(-200, force ? 0 : _timeToAnimation);
     }
 }

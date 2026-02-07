@@ -5,11 +5,16 @@ using System;
 
 public class HappinesManager : MonoBehaviour, IService
 {
-    [SerializeField]
-    private TMP_Text _totalHappyText;
     private int _totalHappy;
+    private int _maxHappy;
+    private UIManager _uiManager;
 
     public Action<int> OnChangeValue;
+
+    private void Awake()
+    {
+        _uiManager = ServiceLocator.CurrentSericeLocator.GetServise<UIManager>();
+    }
 
     private void Start()
     {
@@ -22,7 +27,13 @@ public class HappinesManager : MonoBehaviour, IService
     public void ChangeValue(int value)
     {
         _totalHappy += value;
-        _totalHappyText.text = $"{_totalHappy}";
+        var percent = Mathf.Clamp((int)((_totalHappy * 100f) / _maxHappy ), 0, 100);
+        _uiManager.ResourcesView.Happy = $"{percent}/100";
         OnChangeValue?.Invoke(_totalHappy);
+    }
+
+    public void SetMaxHappy(int value)
+    {
+        _maxHappy = value;
     }
 }
