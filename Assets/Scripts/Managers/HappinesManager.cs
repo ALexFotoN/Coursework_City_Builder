@@ -7,6 +7,7 @@ public class HappinesManager : MonoBehaviour, IService
 {
     private int _totalHappy;
     private int _maxHappy;
+
     private UIManager _uiManager;
 
     public Action<int> OnChangeValue;
@@ -27,8 +28,8 @@ public class HappinesManager : MonoBehaviour, IService
     public void ChangeValue(int value)
     {
         _totalHappy += value;
-        var percent = Mathf.Clamp((int)((_totalHappy * 100f) / _maxHappy ), 0, 100);
-        _uiManager.ResourcesView.Happy = $"{percent}/100";
+        //var percent = Mathf.Clamp((int)((_totalHappy * 100f) / _maxHappy ), 0, 100);
+        _uiManager.ResourcesView.Happy = $"{_totalHappy}/{_maxHappy}";
         OnChangeValue?.Invoke(_totalHappy);
     }
 

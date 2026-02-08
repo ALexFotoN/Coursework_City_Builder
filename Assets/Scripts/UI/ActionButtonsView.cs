@@ -27,7 +27,10 @@ public class ActionButtonsView : MonoBehaviour
         _buildButtons = new();
 
         AddButtons(_buildingsConfig);
-
+        _destructionButton.SetData(new BuildingData
+        {
+            Cost = _destructionManager.DestructionCost
+        });
         _destructionButton.OnPointerClickEvent += () => _buildManager.BuildModeExit();
         _destructionButton.OnPointerClickEvent += () => _destructionManager.DestructionModeEnter();
     }

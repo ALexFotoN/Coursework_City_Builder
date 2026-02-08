@@ -17,6 +17,9 @@ public class UIManager : MonoBehaviour, IService
     [SerializeField]
     private ActionButtonsView _actionButtonsView;
     public ActionButtonsView ActionButtonsView => _actionButtonsView;
+    [SerializeField]
+    private MessageView _messageView;
+    public MessageView MessageView => _messageView;
 
     private float _resourcesViewY;
     private float _exitButtonY;

@@ -34,10 +34,9 @@ public class TaskManager : MonoBehaviour
     {
         if(value >= _targetHappines)
         {
-            //Win
             _happinesManager.OnChangeValue -= CheckHappines;
             _moneyManager.OnChangeValue -= CheckMoney;
-            _uiManager.TitlePopUp.ShowTitle("Win", 2, callback: () => SceneManager.LoadScene(0));
+            _uiManager.TitlePopUp.ShowTitle("Отлично", 2, callback: NextScene);
             _uiManager.HideUI();
         }
     }
@@ -46,11 +45,21 @@ public class TaskManager : MonoBehaviour
     {
         if(value <= 0)
         {
-            //Lose
             _happinesManager.OnChangeValue -= CheckHappines;
             _moneyManager.OnChangeValue -= CheckMoney;
-            _uiManager.TitlePopUp.ShowTitle("Lose", 2, callback: () => SceneManager.LoadScene(0));
+            _uiManager.TitlePopUp.ShowTitle("Попробуй снова", 2, callback: () => SceneManager.LoadScene(0));
             _uiManager.HideUI();
         }
+    }
+
+    private void NextScene()
+    {
+        var currentScene = SceneManager.GetActiveScene().buildIndex;
+        var nextIndex = currentScene + 1;
+        if(SceneManager.sceneCountInBuildSettings == nextIndex)
+        {
+            nextIndex = 0;
+        }
+        SceneManager.LoadScene(nextIndex);
     }
 }

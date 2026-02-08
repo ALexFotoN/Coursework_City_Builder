@@ -13,6 +13,8 @@ public class DestructionManager : MonoBehaviour, IService
 
     private MoneyManager _moneyManager;
 
+    public int DestructionCost => _destructionCost;
+
     private void Awake()
     {
         _moneyManager = ServiceLocator.CurrentSericeLocator.GetServise<MoneyManager>();
@@ -22,7 +24,7 @@ public class DestructionManager : MonoBehaviour, IService
     {
         _destructionActive = true;
 
-        Cursor.SetCursor(_destructionCursor, new Vector2(511.5f, 511.5f), CursorMode.ForceSoftware);
+        Cursor.SetCursor(_destructionCursor, new Vector2(32, 32), CursorMode.ForceSoftware);
     }
 
     public void DestructionModeExit()
@@ -63,5 +65,10 @@ public class DestructionManager : MonoBehaviour, IService
                 destroyable.Remove();
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
     }
 }
