@@ -10,6 +10,10 @@ public class CarManager : MonoBehaviour
     [SerializeField]
     private float _carSpeed;
     [SerializeField]
+    private float _minTimeBetweenCars = 4;
+    [SerializeField]
+    private float _maxTimeBetweenCars = 12;
+    [SerializeField]
     private Transform[] _carPrefabs;
     [SerializeField]
     private Transform[] _firstLinePoints;
@@ -17,8 +21,6 @@ public class CarManager : MonoBehaviour
     private Transform[] _secondLinePoints;
 
     private float _baseTimeToMove = 10;
-    private float _minTimeBetweenCars = 4;
-    private float _maxTimeBetweenCars = 12;
 
     private void Start()
     {

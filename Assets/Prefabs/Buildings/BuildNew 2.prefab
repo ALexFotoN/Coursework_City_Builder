@@ -27906,6 +27906,7 @@ GameObject:
   - component: {fileID: 1017206655134273925}
   - component: {fileID: 793611967248809100}
   - component: {fileID: -3793103062340916576}
+  - component: {fileID: 6891211882579195834}
   m_Layer: 6
   m_Name: BuildNew 2
   m_TagString: Untagged
@@ -27949,6 +27950,7 @@ MonoBehaviour:
     m_Bits: 1
   _buildingColider: {fileID: 793611967248809100}
   _removeConfig: {fileID: 11400000, guid: 32277c6ceed0ff44a89ea993fe711844, type: 2}
+  _defaultData: {fileID: 0}
   _materials: []
   _dissolveSpeed: 1
   _rotationSpeed: 10000
@@ -28000,6 +28002,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!208 &6891211882579195834
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5081124319583405561}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2.5, y: 0.5, z: 2}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 1}
+  m_TimeToStationary: 0.5
 --- !u!1 &5130943270865989605
 GameObject:
   m_ObjectHideFlags: 0
