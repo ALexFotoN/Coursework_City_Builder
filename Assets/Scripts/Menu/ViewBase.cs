@@ -27,12 +27,12 @@ public abstract class ViewBase : MonoBehaviour
     public virtual void Show()
     {
         transform.DOMoveX(_moveToShow, _timeToShow);
-        _containerGroup.DOFade(1, _timeToShow);
+        _containerGroup.DOFade(1, _timeToShow / 2f);
     }
 
     public virtual void Hide()
     {
         transform.DOMoveX(_moveToHide, _timeToShow);
-        _containerGroup.DOFade(0, _timeToShow);
+        _containerGroup.DOFade(0, _timeToShow / 2f);
     }
 }
