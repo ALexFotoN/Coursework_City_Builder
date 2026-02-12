@@ -14,6 +14,8 @@ public class CarManager : MonoBehaviour
     [SerializeField]
     private float _maxTimeBetweenCars = 12;
     [SerializeField]
+    private CarsPool _pool;
+    [SerializeField]
     private Transform[] _carPrefabs;
     [SerializeField]
     private Transform[] _firstLinePoints;
@@ -38,17 +40,18 @@ public class CarManager : MonoBehaviour
 
     private void CreateCar()
     {
-        var car = Instantiate(_carPrefabs[Random.Range(0, _carPrefabs.Length)]);
+        var car = _pool.GetCar(_carPrefabs[Random.Range(0, _carPrefabs.Length)]);
+        car.gameObject.SetActive(true);
         var direction = Random.Range(0, 2);
         if(direction == 0)
         {
             car.position = _firstLinePoints[0].position;
-            StartMove(car, _firstLinePoints, () => Destroy(car.gameObject));
+            StartMove(car, _firstLinePoints, () => car.gameObject.SetActive(false));
         }
         else
         {
             car.position = _secondLinePoints[0].position;
-            StartMove(car, _secondLinePoints, () => Destroy(car.gameObject));
+            StartMove(car, _secondLinePoints, () => car.gameObject.SetActive(false));
         }
     }
 
