@@ -2230,13 +2230,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarManager
   _carSpeed: 0.3
+  _minTimeBetweenCars: 4
+  _maxTimeBetweenCars: 12
+  _pool: {fileID: 0}
   _carPrefabs:
-  - {fileID: 3478527990724272939, guid: d8159cb74e8b0b245a8a61098871fe03, type: 3}
-  - {fileID: 954800040730766175, guid: 3d4ae0983e4430048ae6d7cf0bfc307b, type: 3}
-  - {fileID: 3413763489340215115, guid: 7a1920c579742544e9dface45618f34a, type: 3}
-  - {fileID: 2448117395933325874, guid: 8e93a6008ca69454b8a5826f795ccf20, type: 3}
-  - {fileID: 2330089088498895487, guid: 5e7dfbacd5e31b3469dce9dda3170476, type: 3}
-  - {fileID: 7508796087611979252, guid: 46e5d9fab8db51a49be829961f71d0dd, type: 3}
+  - {fileID: 6632657748557917988, guid: 2a5de26126f2318429dc65e6acbc95ba, type: 3}
+  - {fileID: 4002773071365996795, guid: a6f240996bbf59946a370d8010614176, type: 3}
+  - {fileID: 7629846432450005769, guid: 301cbc247c7be9745927300518039e0b, type: 3}
   _firstLinePoints:
   - {fileID: 744127740642130726}
   - {fileID: 3406675115542545658}
