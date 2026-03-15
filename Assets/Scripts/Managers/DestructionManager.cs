@@ -10,6 +10,7 @@ public class DestructionManager : MonoBehaviour, IService
     private Texture2D _destructionCursor;
 
     private bool _destructionActive;
+    private string _cancelAudio = "click";
 
     private MoneyManager _moneyManager;
 
@@ -47,6 +48,7 @@ public class DestructionManager : MonoBehaviour, IService
         if (Input.GetMouseButtonUp(1))
         {
             DestructionModeExit();
+            AudioService.PlayAudio(_cancelAudio);
         }
     }
 

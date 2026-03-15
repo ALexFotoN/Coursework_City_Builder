@@ -19,6 +19,8 @@ public class Building : MonoBehaviour, IDestroyable
     [SerializeField]
     protected BuildingDataConfigSO _defaultData;
 
+    private string _destroyAudio = "destroy";
+
     protected BuildingData _data;
     public BuildingData Data => _data;
     public string BuildingId => _data.Id;
@@ -62,6 +64,7 @@ public class Building : MonoBehaviour, IDestroyable
 
     public void Remove()
     {
+        AudioService.PlayAudio(_destroyAudio);
         _particle.Play(true);
         _buildingObject.DOMoveY(_removeConfig.FallPosition, _removeConfig.FallDuration).SetEase(Ease.InExpo);
         _buildingObject.DORotate(_buildingObject.transform.rotation.eulerAngles + 

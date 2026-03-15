@@ -16,6 +16,8 @@ public class SettingsView : ViewBase
 
         _fullScreenToggle.SetIsOnWithoutNotify(Screen.fullScreen);
         _vSyncToggle.SetIsOnWithoutNotify(QualitySettings.vSyncCount == 1);
+
+        AudioService.PlayAudio("forest");
     }
 
     private void FullScreenChanged(bool value)

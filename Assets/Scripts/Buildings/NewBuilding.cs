@@ -12,6 +12,9 @@ public class NewBuilding : Building
     [SerializeField]
     private float _rotationSpeed;
 
+    private string _buildAudio = "build";
+    private string _cancelAudio = "click";
+
     private int _collisionCount;
     private float _currentDissolveAmount;
 
@@ -68,6 +71,7 @@ public class NewBuilding : Building
         if (Input.GetMouseButtonUp(1))
         {
             gameObject.SetActive(false);
+            AudioService.PlayAudio(_cancelAudio);
         }
     }
 
@@ -76,12 +80,14 @@ public class NewBuilding : Building
         if (_collisionCount > 0 || !_moneyManager.TrySpend(_data.Cost))
         {
             gameObject.SetActive(false);
+            AudioService.PlayAudio(_cancelAudio);
         }
         else
         {
             IsBuilt = true;
-            _buildingColider.isTrigger = false;
+            _buildingColider.isTrigger = false; 
             StartCoroutine(Disolve());
+            AudioService.PlayAudio(_buildAudio);
         }
     }
 

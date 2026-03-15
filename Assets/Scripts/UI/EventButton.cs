@@ -16,6 +16,8 @@ public class EventButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     [SerializeField]
     private ResourcesInfoData _happyInfo;
 
+    private string _audioId = "click";
+
     [Serializable]
     private struct ResourcesInfoData
     {
@@ -30,6 +32,7 @@ public class EventButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     
     public void OnPointerClick(PointerEventData eventData)
     {
+        AudioService.PlayAudio(_audioId);
         OnPointerClickEvent?.Invoke();
     }
 

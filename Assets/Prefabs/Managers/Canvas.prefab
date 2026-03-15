@@ -1780,6 +1780,7 @@ GameObject:
   - component: {fileID: 5109388620190770953}
   - component: {fileID: 5388988189373179899}
   - component: {fileID: 4701021239330409065}
+  - component: {fileID: 5640228709294256136}
   m_Layer: 5
   m_Name: ExitButton
   m_TagString: Untagged
@@ -1889,7 +1890,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5388988189373179899}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5640228709294256136}
+        m_TargetAssemblyTypeName: AudioToButton, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5640228709294256136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6835175501629909436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c0f079114d881c40818194c00b5767f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioToButton
+  _audioId: click
 --- !u!1 &6993545990949596890
 GameObject:
   m_ObjectHideFlags: 0
