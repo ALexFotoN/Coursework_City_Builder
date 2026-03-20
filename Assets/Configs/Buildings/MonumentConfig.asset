@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BuildingDataConfigSO
   _data:
     Id: monument
-    Icon: {fileID: 0}
+    Icon: {fileID: 21300000, guid: 92a6e3a6eca34f441b8947ef71bf45df, type: 3}
     Prefab: {fileID: 1501852150801031495, guid: 38a2396da9ba8874db2a0c1fd0ec82f0, type: 3}
     Cost: 1
     Happy: 20
