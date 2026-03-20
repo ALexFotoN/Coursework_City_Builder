@@ -16,7 +16,8 @@ MonoBehaviour:
     Id: arc
     Icon: {fileID: 0}
     Prefab: {fileID: 8911705475245685825, guid: 1be9cd8588e06674ca3fef1fb480415a, type: 3}
-    Cost: 0
+    Cost: 1
     Happy: 20
+    OnlyOne: 1
     MinWorldHeight: -1
     MaxWorldHeight: 4

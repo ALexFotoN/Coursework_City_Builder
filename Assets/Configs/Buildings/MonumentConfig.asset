@@ -16,7 +16,8 @@ MonoBehaviour:
     Id: monument
     Icon: {fileID: 0}
     Prefab: {fileID: 1501852150801031495, guid: 38a2396da9ba8874db2a0c1fd0ec82f0, type: 3}
-    Cost: 0
+    Cost: 1
     Happy: 20
+    OnlyOne: 1
     MinWorldHeight: -1
     MaxWorldHeight: 4

@@ -17,6 +17,7 @@ public class EventButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     private ResourcesInfoData _happyInfo;
 
     private string _audioId = "click";
+    private bool _enabled = true;
 
     [Serializable]
     private struct ResourcesInfoData
@@ -32,6 +33,10 @@ public class EventButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (!_enabled)
+        {
+            return;
+        }
         AudioService.PlayAudio(_audioId);
         OnPointerClickEvent?.Invoke();
     }
@@ -74,5 +79,19 @@ public class EventButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     {
         _moneyInfo.Container.SetActive(false);
         _happyInfo.Container.SetActive(false);
+    }
+
+    public void Disable()
+    {
+        _enabled = false;
+        _backImage.color = Color.grey;
+        _iconImage.color = Color.grey;
+    }
+
+    public void Enable()
+    {
+        _enabled = true;
+        _backImage.color = Color.white;
+        _iconImage.color = Color.white;
     }
 }

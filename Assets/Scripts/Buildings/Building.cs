@@ -37,6 +37,7 @@ public class Building : MonoBehaviour, IDestroyable
             if (value)
             {
                 _happinesManager.ChangeValue(_data.Happy);
+                _actionButtonsView.UsedLimitedBuild(_data);
                 OnBuild?.Invoke();
             }
             _isBuilt = value;
@@ -47,11 +48,13 @@ public class Building : MonoBehaviour, IDestroyable
 
     protected MoneyManager _moneyManager;
     private HappinesManager _happinesManager;
+    private ActionButtonsView _actionButtonsView;
 
     private void Awake()
     {
         _moneyManager = ServiceLocator.CurrentSericeLocator.GetServise<MoneyManager>();
         _happinesManager = ServiceLocator.CurrentSericeLocator.GetServise<HappinesManager>();
+        _actionButtonsView = ServiceLocator.CurrentSericeLocator.GetServise<UIManager>().ActionButtonsView;
 
         if (_defaultData)
             _data = _defaultData.Data;
@@ -73,6 +76,7 @@ public class Building : MonoBehaviour, IDestroyable
         _buildingColider.enabled = false;
         StartCoroutine(DelayToReturn());
         _happinesManager.ChangeValue(-_data.Happy);
+        _actionButtonsView.ReturnLimitedBuild(_data);
     }
 
     private IEnumerator DelayToReturn()

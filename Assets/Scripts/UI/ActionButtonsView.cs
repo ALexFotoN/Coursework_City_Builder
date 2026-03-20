@@ -47,4 +47,28 @@ public class ActionButtonsView : MonoBehaviour
             _buildButtons.Add(button);
         }
     }
+
+    public void UsedLimitedBuild(BuildingData data)
+    {
+        foreach (var button in _buildButtons)
+        {
+            if(button.Data == data)
+            {
+                button.Disable();
+                return;
+            }
+        }
+    }
+
+    public void ReturnLimitedBuild(BuildingData data)
+    {
+        foreach (var button in _buildButtons)
+        {
+            if (button.Data == data)
+            {
+                button.Enable();
+                return;
+            }
+        }
+    }
 }

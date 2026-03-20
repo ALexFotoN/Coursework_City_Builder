@@ -16,7 +16,8 @@ MonoBehaviour:
     Id: obelisque
     Icon: {fileID: 0}
     Prefab: {fileID: 2974490488793611569, guid: 97c6919fe7ccd1546851603c5de27ded, type: 3}
-    Cost: 0
+    Cost: 1
     Happy: 20
+    OnlyOne: 1
     MinWorldHeight: -1
     MaxWorldHeight: 4

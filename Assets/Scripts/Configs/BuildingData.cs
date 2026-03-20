@@ -11,6 +11,7 @@ public class BuildingData
     [Header("Data")]
     public int Cost;
     public int Happy;
+    public bool OnlyOne;
 
     [Header("Disolve Shader")]
     public float MinWorldHeight = -1f;
