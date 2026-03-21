@@ -11,13 +11,18 @@ public class ActionButtonsView : MonoBehaviour
     private BuildingsConfigSO _buildingsConfig;
     [SerializeField]
     private RectTransform _rect;
+    [SerializeField]
+    private GameObject _dividingLine;
+    [Header("Road")]
+    [SerializeField]
+    private bool _useRoad;
+
     public RectTransform Rect => _rect;
 
     private List<EventButton> _buildButtons;
 
     private BuildManager _buildManager;
     private DestructionManager _destructionManager;
-
 
     private void Awake()
     {
@@ -26,21 +31,27 @@ public class ActionButtonsView : MonoBehaviour
 
         _buildButtons = new();
 
-        AddButtons(_buildingsConfig);
+        AddButtons(_buildingsConfig.BuildingConfigs);
         _destructionButton.SetData(new BuildingData
         {
             Cost = _destructionManager.DestructionCost
         });
         _destructionButton.OnPointerClickEvent += () => _buildManager.BuildModeExit();
         _destructionButton.OnPointerClickEvent += () => _destructionManager.DestructionModeEnter();
+
+        if (_useRoad)
+        {
+            Instantiate(_dividingLine, transform);
+            AddButtons(_buildingsConfig.RoadConfigs);
+        }
     }
 
-    public void AddButtons(BuildingsConfigSO buildingsConfig)
+    public void AddButtons(BuildingDataConfigSO[] configs)
     {
-        for (int i = 0; i < buildingsConfig.BuildingConfigs.Length; i++)
+        for (int i = 0; i < configs.Length; i++)
         {
             var button = Instantiate(_buildButtonPrefab, transform);
-            var data = buildingsConfig.BuildingConfigs[i].Data;
+            var data = configs[i].Data;
             button.SetData(data);
             button.OnPointerClickEvent += () => _buildManager.BuildModeEnter(data);
             button.OnPointerClickEvent += () => _destructionManager.DestructionModeExit();

@@ -1,23 +1,16 @@
-using UnityEngine;
-using System.Linq;
-using System.Collections;
-using DG.Tweening;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
-public class NewBuilding : Building
+public class RoadBuilding : Building
 {
     [SerializeField]
     private Material[] _materials;
-    [SerializeField] 
-    private float _dissolveSpeed = 0.5f;
-    [SerializeField]
-    private float _rotationSpeed;
 
     private string _buildAudio = "build";
     private string _cancelAudio = "click";
 
     private int _collisionCount;
-    private float _currentDissolveAmount;
 
     private List<Color> _baseColors;
 
@@ -25,24 +18,17 @@ public class NewBuilding : Building
     {
         base.Init(data);
         IsBuilt = false;
-        _currentDissolveAmount = 1f;
         _buildingColider.enabled = true;
         _buildingColider.isTrigger = true;
         _collisionCount = 0;
-        _buildingObject.DOMoveY(0,0);
-        _buildingObject.DORotate(new Vector3(0, _buildingObject.transform.rotation.eulerAngles.y, 0), 0);
+        transform.parent = ServiceLocator.CurrentSericeLocator.GetServise<AddressManager>().RoadContainer;
+
         if (_materials == null || _materials.Length == 0)
         {
             _materials = GetComponentsInChildren<MeshRenderer>().Select(x => x.material).ToArray();
         }
-        foreach (var material in _materials)
-        {
-            material.SetFloat("_MinWorldHeight", data.MinWorldHeight);
-            material.SetFloat("_MaxWorldHeight", data.MaxWorldHeight);
-            material.SetFloat("_DissolveAmount", 0f);
-        }
 
-        if(_baseColors == null)
+        if (_baseColors == null)
         {
             _baseColors = new();
 
@@ -69,12 +55,26 @@ public class NewBuilding : Building
 
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _groundLayer))
         {
-            transform.position = hit.point;
+            Vector3 localHitPoint = transform.parent.InverseTransformPoint(hit.point);
+
+            int gridX = Mathf.RoundToInt(localHitPoint.x / 5f) * 5;
+            int gridZ = Mathf.RoundToInt(localHitPoint.z / 5f) * 5;
+
+            transform.localPosition = new Vector3(gridX, 0, gridZ);
         }
 
         float scroll = Input.GetAxis("Mouse ScrollWheel");
 
-        float rotationAmount = scroll * _rotationSpeed * Time.deltaTime;
+        float rotationAmount = 0;
+
+        if(scroll > 0)
+        {
+            rotationAmount = 90;
+        }
+        else if (scroll < 0)
+        {
+            rotationAmount = 90;
+        }
 
         transform.Rotate(Vector3.up, rotationAmount, Space.World);
 
@@ -99,8 +99,11 @@ public class NewBuilding : Building
         else
         {
             IsBuilt = true;
-            _buildingColider.isTrigger = false; 
-            StartCoroutine(Disolve());
+            _buildingColider.isTrigger = false;
+            for (int i = 0; i < _materials.Length; i++)
+            {
+                _materials[i].SetColor("_BaseColor", _baseColors[i]);
+            }
             AudioService.PlayAudio(_buildAudio);
         }
     }
@@ -125,31 +128,12 @@ public class NewBuilding : Building
             return;
         }
         _collisionCount--;
-        if(_collisionCount == 0)
+        if (_collisionCount == 0)
         {
             foreach (var material in _materials)
             {
                 material.SetColor("_BaseColor", Color.cyan);
             }
-        }
-    }
-
-    private IEnumerator Disolve()
-    {
-        for (int i = 0; i < _materials.Length; i++)
-        {
-            _materials[i].SetColor("_BaseColor", _baseColors[i]);
-            _materials[i].SetFloat("_DissolveAmount", 1f);
-        }
-        while (_currentDissolveAmount > 0f)
-        {
-            _currentDissolveAmount -= _dissolveSpeed * Time.deltaTime;
-            _currentDissolveAmount = Mathf.Clamp01(_currentDissolveAmount);
-            foreach (var material in _materials)
-            {
-                material.SetFloat("_DissolveAmount", _currentDissolveAmount);
-            }
-            yield return null;
         }
     }
 }

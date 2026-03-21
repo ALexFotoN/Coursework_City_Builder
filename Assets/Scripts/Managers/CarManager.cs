@@ -26,6 +26,10 @@ public class CarManager : MonoBehaviour
 
     private void Start()
     {
+        if(_firstLinePoints.Length == 0 || _secondLinePoints.Length == 0)
+        {
+            return;
+        }
         StartCoroutine(LifeTime());
     }
 
