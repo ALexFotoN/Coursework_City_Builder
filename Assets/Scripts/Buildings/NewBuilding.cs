@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Linq;
 using System.Collections;
 using DG.Tweening;
+using System.Collections.Generic;
 
 public class NewBuilding : Building
 {
@@ -17,6 +18,8 @@ public class NewBuilding : Building
 
     private int _collisionCount;
     private float _currentDissolveAmount;
+
+    private List<Color> _baseColors;
 
     public override void Init(BuildingData data)
     {
@@ -38,8 +41,11 @@ public class NewBuilding : Building
             material.SetFloat("_MaxWorldHeight", data.MaxWorldHeight);
             material.SetFloat("_DissolveAmount", 0f);
         }
+
+        _baseColors = new();
         foreach (var material in _materials)
         {
+            _baseColors.Add(material.GetColor("_BaseColor"));
             material.SetColor("_BaseColor", Color.cyan);
         }
     }
@@ -122,10 +128,13 @@ public class NewBuilding : Building
 
     private IEnumerator Disolve()
     {
+        for (int i = 0; i < _materials.Length; i++)
+        {
+            _materials[i].SetColor("_BaseColor", _baseColors[i]);
+            _materials[i].SetFloat("_DissolveAmount", 1f);
+        }
         foreach (var material in _materials)
         {
-            material.SetColor("_BaseColor", Color.white);
-            material.SetFloat("_DissolveAmount", 1f);
         }
         while (_currentDissolveAmount > 0f)
         {

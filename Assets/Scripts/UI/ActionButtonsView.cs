@@ -52,7 +52,7 @@ public class ActionButtonsView : MonoBehaviour
     {
         foreach (var button in _buildButtons)
         {
-            if(button.Data == data)
+            if(button.Data.OnlyOne && button.Data == data)
             {
                 button.Disable();
                 return;
