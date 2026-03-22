@@ -3,6 +3,7 @@ using System;
 using DG.Tweening;
 using Random = UnityEngine.Random;
 using System.Collections;
+using UnityEngine.AI;
 
 public class Building : MonoBehaviour, IDestroyable
 {
@@ -20,6 +21,7 @@ public class Building : MonoBehaviour, IDestroyable
     protected BuildingDataConfigSO _defaultData;
 
     private string _destroyAudio = "destroy";
+    private NavMeshObstacle _navMeshObstacle;
 
     protected BuildingData _data;
     public BuildingData Data => _data;
@@ -40,6 +42,7 @@ public class Building : MonoBehaviour, IDestroyable
                 _actionButtonsView.UsedLimitedBuild(_data);
                 OnBuild?.Invoke();
             }
+            _navMeshObstacle.enabled = value;
             _isBuilt = value;
         }
     }
@@ -55,6 +58,9 @@ public class Building : MonoBehaviour, IDestroyable
         _moneyManager = ServiceLocator.CurrentSericeLocator.GetServise<MoneyManager>();
         _happinesManager = ServiceLocator.CurrentSericeLocator.GetServise<HappinesManager>();
         _actionButtonsView = ServiceLocator.CurrentSericeLocator.GetServise<UIManager>().ActionButtonsView;
+
+        _navMeshObstacle = GetComponent<NavMeshObstacle>();
+        _navMeshObstacle.enabled = false;
 
         if (_defaultData)
             _data = _defaultData.Data;
