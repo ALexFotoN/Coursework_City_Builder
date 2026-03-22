@@ -51,9 +51,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MessageView
   _messageBlock: {fileID: 3002186572712629132}
   _messageText: {fileID: 140601024160694821}
-  _textSpeed: 25
+  _textSpeed: 50
   _fadeSpeed: 5
-  _timeBeforeEnd: 1
+  _timeBeforeEnd: 3
 --- !u!1 &6439145517041588830
 GameObject:
   m_ObjectHideFlags: 0

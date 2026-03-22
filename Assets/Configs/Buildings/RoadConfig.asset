@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BuildingDataConfigSO
   _data:
     Id: road
-    Icon: {fileID: 0}
+    Icon: {fileID: 21300000, guid: c261721f4c228134cb43a003e3d5c60e, type: 3}
     Prefab: {fileID: 5383117251700296487, guid: 5cbb8695f8788da4fa2edb8312317002, type: 3}
-    Cost: 0
-    Happy: 0
+    Cost: 100
+    Happy: 1
     OnlyOne: 0
     MinWorldHeight: -1
     MaxWorldHeight: 4

@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BuildingDataConfigSO
   _data:
     Id: playground
-    Icon: {fileID: 0}
+    Icon: {fileID: 21300000, guid: ce7e0f194750d1040b146151fab98160, type: 3}
     Prefab: {fileID: 4336517679919126389, guid: e8f64c5e699fe264c9c56f34006440a3, type: 3}
     Cost: 100
-    Happy: 10
+    Happy: 15
     OnlyOne: 0
     MinWorldHeight: -1
     MaxWorldHeight: 4
