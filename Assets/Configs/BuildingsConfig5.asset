@@ -13,12 +13,6 @@ MonoBehaviour:
   m_Name: BuildingsConfig5
   m_EditorClassIdentifier: Assembly-CSharp::BuildingsConfigSO
   _buildingConfigs:
-  - {fileID: 11400000, guid: e69edeb740a99354d894eb3b48b65de8, type: 2}
-  - {fileID: 11400000, guid: 141f2d804ff107d498df0d686846ed9c, type: 2}
-  - {fileID: 11400000, guid: b26a674e554e0d4418a170ae94716224, type: 2}
-  - {fileID: 11400000, guid: 5d8dbaf514c51ad4994120f65c1fa68e, type: 2}
-  - {fileID: 11400000, guid: 63b1c932d40976c46b680e49d1a64726, type: 2}
-  - {fileID: 11400000, guid: ac4c865948e1f6045871ecf0701556fe, type: 2}
-  _roadConfigs:
-  - {fileID: 11400000, guid: d4c548b3a0b507241911610637768368, type: 2}
-  - {fileID: 11400000, guid: ca2bb0c5c210b024581b5ad28f9b89de, type: 2}
+  - {fileID: 11400000, guid: 3d803480e7b3c014780ff5a4c3c3fa1a, type: 2}
+  - {fileID: 11400000, guid: 62bb1cf437f3e6d48979792bd766b623, type: 2}
+  _roadConfigs: []
