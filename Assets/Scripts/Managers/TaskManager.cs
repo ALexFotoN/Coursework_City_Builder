@@ -7,6 +7,10 @@ public class TaskManager : MonoBehaviour
     private int _targetHappines;
     [SerializeField]
     private int _startMoney;
+    [SerializeField]
+    private string _winTitleString;
+    [SerializeField]
+    private string _loseTitleString;
 
     private UIManager _uiManager;
     private MoneyManager _moneyManager;
@@ -36,7 +40,7 @@ public class TaskManager : MonoBehaviour
         {
             _happinesManager.OnChangeValue -= CheckHappines;
             _moneyManager.OnChangeValue -= CheckMoney;
-            _uiManager.TitlePopUp.ShowTitle("Отлично", 2, callback: NextScene);
+            _uiManager.TitlePopUp.ShowTitle(_winTitleString, 2, callback: NextScene);
             _uiManager.HideUI();
         }
     }
@@ -47,7 +51,7 @@ public class TaskManager : MonoBehaviour
         {
             _happinesManager.OnChangeValue -= CheckHappines;
             _moneyManager.OnChangeValue -= CheckMoney;
-            _uiManager.TitlePopUp.ShowTitle("Попробуй снова", 2, callback: () => SceneManager.LoadScene(0));
+            _uiManager.TitlePopUp.ShowTitle(_loseTitleString, 2, callback: () => SceneManager.LoadScene(0));
             _uiManager.HideUI();
         }
     }
